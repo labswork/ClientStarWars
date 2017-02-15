@@ -34,7 +34,7 @@ public class MainClass {
         System.out.print("status text: ");
         System.out.println(jsonResponse.getStatusText());
 
-        System.out.print("heders: ");
+        System.out.print("headers: ");
         System.out.println(jsonResponse.getHeaders());
 
         System.out.print("body: ");
