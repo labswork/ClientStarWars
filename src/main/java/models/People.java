@@ -9,43 +9,19 @@ import java.util.ArrayList;
  * Created by rootid on 13.02.2017.
  */
 public class People {
-    @JsonProperty("name")
     private String name;
-
-    @JsonProperty("height")
     private int height;
-
-    @JsonProperty("mass")
     private int mass;
-
-    @JsonProperty("hair_color")
     private String hair_color;
-
-    @JsonProperty("skin_color")
     private String skin_color;
-
-    @JsonProperty("eye_color")
     private String eye_color;
-
-    @JsonProperty("birth_year")
     private String birth_year;
-
-    @JsonProperty("gender")
     private String gender;
-
-    @JsonProperty("homeworld")
     private String homeworld;
 
-    @JsonProperty("films")
     private ArrayList<String> films;
-
-    @JsonProperty("species")
     private ArrayList<String> species;
-
-    @JsonProperty("vehicles")
     private ArrayList<String> vehicles;
-
-    @JsonProperty("starships")
     private ArrayList<String> starships;
 
     public People(){
