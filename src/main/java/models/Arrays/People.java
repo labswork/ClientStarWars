@@ -16,6 +16,8 @@ public class People {
 
     private  Map<String, Human> peoples = new HashMap<String, Human>();
 
+
+
     public void addPeople(String url, Human human){
         peoples.put(url, human);
     }

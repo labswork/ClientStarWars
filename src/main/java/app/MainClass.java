@@ -1,7 +1,6 @@
 package app;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -17,37 +16,49 @@ public class MainClass {
 
 
 
-        HttpResponse<JsonNode> jsonResponse = Unirest.get("http://swapi.co/api/people/")
-                .asJson();
+        String url = "http://swapi.co/api/people/";
+        String next = "First Start";
+        People people = new People();
 
-        System.out.print("status code: ");
-        System.out.println(jsonResponse.getStatus());
+        while (next != "") {
+            HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
+                    .asJson();
 
-        System.out.print("status text: ");
-        System.out.println(jsonResponse.getStatusText());
-
-        System.out.print("headers: ");
-        System.out.println(jsonResponse.getHeaders());
-
-        System.out.print("body: ");
-        System.out.println(jsonResponse.getBody());
-
-//        Gson gson = new Gson();
-        String responseJsonString = jsonResponse.getBody().toString();
-//        People people = gson.fromJson(responseJsonString, People.class);
-////        Human human = gson.fromJson(responseJsonString, Human.class);
-////
-////        System.out.println(human.getName());
-////        System.out.println(human.getUrl());
+//            System.out.print("status code: ");
+//            System.out.println(jsonResponse.getStatus());
 //
-////        System.out.println(people.getPeople("http://swapi.co/api/people/1/").getName());
-//        Human human = people.getPeople("http://swapi.co/api/people/1/");
-//        System.out.println(human.getName());
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(People.class, new PeopleDeserializer())
-                .create();
-        People people = gson.fromJson(responseJsonString, People.class);
-        Human human = people.getPeople("http://swapi.co/api/people/1/");
+//            System.out.print("status text: ");
+//            System.out.println(jsonResponse.getStatusText());
+//
+//            System.out.print("headers: ");
+//            System.out.println(jsonResponse.getHeaders());
+//
+            System.out.print("body: ");
+            System.out.println(jsonResponse.getBody());
+            String responseJsonString = jsonResponse.getBody().toString();
+
+            JsonElement jsonElementParse = new JsonParser().parse(responseJsonString);
+            JsonObject jsonObjectParse = jsonElementParse.getAsJsonObject();
+
+//            System.out.println(jsonObjectParse.get("next").getAsString());
+
+            if (jsonObjectParse.get("next").isJsonNull()){
+                next = "";
+            }
+            else {
+                next = jsonObjectParse.get("next").getAsString();
+                url = next;
+            }
+
+
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(People.class, new PeopleDeserializer())
+                    .create();
+            people = gson.fromJson(responseJsonString, People.class);
+        }
+
+
+        Human human = people.getPeople("http://swapi.co/api/people/88/");
         System.out.println(human.getName());
 
 
