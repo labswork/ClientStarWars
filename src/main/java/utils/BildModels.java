@@ -6,7 +6,10 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import deserialize.PeopleDeserializer;
+import deserialize.PlanetsDeserializer;
 import models.Arrays.People;
+import models.Arrays.Planets;
+import models.Planet;
 
 /**
  * Created by rootid on 19.02.2017.
@@ -61,6 +64,29 @@ public class BildModels {
             people = gson.fromJson(responseJsonString, People.class);
         }
         return people;
+    }
+
+    public Planets bildPlanets() throws UnirestException{
+        Planets planets = new Planets();
+        String next = "First Start";
+        String url = "http://swapi.co/api/planets/";
+
+        while (next != ""){
+            String responseJsonString = requestJsonString(url);
+            if (itLastPage(responseJsonString)){
+                next = "";
+            }
+            else {
+                next = getNextPageLink(responseJsonString);
+                url = next;
+            }
+
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Planets.class, new PlanetsDeserializer())
+                    .create();
+            planets = gson.fromJson(responseJsonString, Planets.class);
+        }
+        return planets;
     }
 
 }

@@ -9,8 +9,8 @@ import java.lang.reflect.Type;
 /**
  * Created by rootid on 19.02.2017.
  */
-public class PlanetsDeserializer implements JsonDeserializer<Planet> {
-    @Override
+public class PlanetsDeserializer implements JsonDeserializer<Planets> {
+//    @Override
     public Planets deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         Planets planets = new Planets();
 
