@@ -13,18 +13,21 @@ import models.Arrays.People;
  */
 public class BildModels {
 
+    public String requestJsonString(String url) throws UnirestException{
+        HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
+                .asJson();
+        System.out.print("body: ");
+        System.out.println(jsonResponse.getBody());
+        return jsonResponse.getBody().toString();
+    }
 
-    public People bildPeople() throws UnirestException {
+    public People bildPeople() throws UnirestException{
         String url = "http://swapi.co/api/people/";
         String next = "First Start";
         People people = new People();
 
         while (next != "") {
-            HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
-                    .asJson();
-            System.out.print("body: ");
-            System.out.println(jsonResponse.getBody());
-            String responseJsonString = jsonResponse.getBody().toString();
+            String responseJsonString = requestJsonString(url);
 
             JsonElement jsonElementParse = new JsonParser().parse(responseJsonString);
             JsonObject jsonObjectParse = jsonElementParse.getAsJsonObject();
