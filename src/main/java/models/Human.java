@@ -142,10 +142,4 @@ public class Human {
         this.starships = starships;
     }
 
-
-    //
-//
-//    Human(String type) {
-//        super("people");
-//    }
 }
