@@ -16,12 +16,8 @@ public class PeopleDeserializer implements JsonDeserializer<People> {
         People people = new People();
 
         JsonObject jsonObject = json.getAsJsonObject();
-        JsonArray jsonArray = jsonObject.get("results").getAsJsonArray();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("results");
 
-//        jsonObject = json.getAsJsonObject();
-
-
-//        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()){
         for (int i = 0; i < jsonArray.size(); i++) {
 
             Human human = context.deserialize(jsonArray.get(i), Human.class);
@@ -29,7 +25,6 @@ public class PeopleDeserializer implements JsonDeserializer<People> {
             people.addPeople(url, human);
         }
         return people;
-
 
     }
 }
