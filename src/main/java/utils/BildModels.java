@@ -20,6 +20,24 @@ public class BildModels {
         System.out.println(jsonResponse.getBody());
         return jsonResponse.getBody().toString();
     }
+    public boolean itLastPage(String jsonString){
+        JsonObject jsonObjectParse = getJsonObjectParse(jsonString);
+        if (jsonObjectParse.get("next").isJsonNull()){
+            return true;
+        }
+        return false;
+    }
+    public String getNextPageLink(String jsonString){
+        JsonObject jsonObjectParse = getJsonObjectParse(jsonString);
+        return jsonObjectParse.get("next").getAsString();
+    }
+    public JsonObject getJsonObjectParse(String jsonString){
+        JsonElement jsonElementParse = new JsonParser().parse(jsonString);
+        return jsonElementParse.getAsJsonObject();
+    }
+
+
+
 
     public People bildPeople() throws UnirestException{
         String url = "http://swapi.co/api/people/";
@@ -29,18 +47,13 @@ public class BildModels {
         while (next != "") {
             String responseJsonString = requestJsonString(url);
 
-            JsonElement jsonElementParse = new JsonParser().parse(responseJsonString);
-            JsonObject jsonObjectParse = jsonElementParse.getAsJsonObject();
-
-
-            if (jsonObjectParse.get("next").isJsonNull()){
+            if (itLastPage(responseJsonString)){
                 next = "";
             }
             else {
-                next = jsonObjectParse.get("next").getAsString();
+                next = getNextPageLink(responseJsonString);
                 url = next;
             }
-
 
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(People.class, new PeopleDeserializer())
