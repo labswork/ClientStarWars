@@ -11,12 +11,7 @@ import java.util.Map;
  * Created by rootid on 18.02.2017.
  */
 public class People {
-
-
-
     private  Map<String, Human> peoples = new HashMap<String, Human>();
-
-
 
     public void addPeople(String url, Human human){
         peoples.put(url, human);
