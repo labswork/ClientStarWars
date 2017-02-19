@@ -5,10 +5,13 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import deserialize.FilmsDeserializer;
 import deserialize.PeopleDeserializer;
 import deserialize.PlanetsDeserializer;
+import models.Arrays.Films;
 import models.Arrays.People;
 import models.Arrays.Planets;
+import models.Film;
 import models.Planet;
 
 /**
@@ -87,6 +90,29 @@ public class BildModels {
             planets = gson.fromJson(responseJsonString, Planets.class);
         }
         return planets;
+    }
+
+    public Films bildFilms() throws UnirestException{
+        Films films = new Films();
+        String next = "First Start";
+        String url = "http://swapi.co/api/films/";
+
+        while (next != ""){
+            String responseJsonString = requestJsonString(url);
+            if (itLastPage(responseJsonString)){
+                next = "";
+            }
+            else {
+                next = getNextPageLink(responseJsonString);
+                url = next;
+            }
+
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Films.class, new FilmsDeserializer())
+                    .create();
+            films = gson.fromJson(responseJsonString, Films.class);
+        }
+        return films;
     }
 
 }
