@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by rootid on 13.02.2017.
  */
-public class People {
+public class Human {
     private String name;
     private int height;
     private int mass;
@@ -24,7 +24,17 @@ public class People {
     private ArrayList<String> vehicles;
     private ArrayList<String> starships;
 
-    public People(){
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private String url;
+
+    public Human(){
 
     }
 
@@ -135,7 +145,7 @@ public class People {
 
     //
 //
-//    People(String type) {
+//    Human(String type) {
 //        super("people");
 //    }
 }
