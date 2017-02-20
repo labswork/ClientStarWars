@@ -8,9 +8,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import deserialize.FilmsDeserializer;
 import deserialize.PeopleDeserializer;
 import deserialize.PlanetsDeserializer;
+import deserialize.SpeciesDeserializer;
 import models.Arrays.Films;
 import models.Arrays.People;
 import models.Arrays.Planets;
+import models.Arrays.SpeciesMap;
 import models.Film;
 import models.Planet;
 
@@ -106,13 +108,34 @@ public class BildModels {
                 next = getNextPageLink(responseJsonString);
                 url = next;
             }
-
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Films.class, new FilmsDeserializer())
                     .create();
             films = gson.fromJson(responseJsonString, Films.class);
         }
         return films;
+    }
+
+    public SpeciesMap bildSpeciesMap() throws UnirestException{
+        SpeciesMap speciesMap = new SpeciesMap();
+        String next = "First Start";
+        String url = "http://swapi.co/api/species/";
+
+        while (next != ""){
+            String responseJsonString = requestJsonString(url);
+            if (itLastPage(responseJsonString)){
+                next = "";
+            }
+            else {
+                next = getNextPageLink(responseJsonString);
+                url = next;
+            }
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(SpeciesMap.class, new SpeciesDeserializer())
+                    .create();
+            speciesMap = gson.fromJson(responseJsonString, SpeciesMap.class);
+        }
+        return speciesMap;
     }
 
 }
