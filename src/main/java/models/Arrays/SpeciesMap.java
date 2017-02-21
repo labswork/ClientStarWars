@@ -21,4 +21,7 @@ public class SpeciesMap {
     public Map<String, Species> getSpeciesMap() {
         return speciesMap;
     }
+    public void addAllSpecies(SpeciesMap speciesMap){
+        this.speciesMap.putAll(speciesMap.getSpeciesMap());
+    }
 }

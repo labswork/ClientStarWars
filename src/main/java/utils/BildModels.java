@@ -20,6 +20,14 @@ import models.Planet;
  * Created by rootid on 19.02.2017.
  */
 public class BildModels {
+    private People people = new People();
+    private Planets planets = new Planets();
+    private Films films = new Films();
+    private SpeciesMap speciesMap = new SpeciesMap();
+
+
+
+
 
     public String requestJsonString(String url) throws UnirestException{
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
@@ -67,8 +75,9 @@ public class BildModels {
                     .registerTypeAdapter(People.class, new PeopleDeserializer())
                     .create();
             people = gson.fromJson(responseJsonString, People.class);
+            this.people.getAllPeople(people);
         }
-        return people;
+        return this.people;
     }
 
     public Planets bildPlanets() throws UnirestException{
@@ -90,8 +99,9 @@ public class BildModels {
                     .registerTypeAdapter(Planets.class, new PlanetsDeserializer())
                     .create();
             planets = gson.fromJson(responseJsonString, Planets.class);
+            this.planets.addAllPlanets(planets);
         }
-        return planets;
+        return this.planets;
     }
 
     public Films bildFilms() throws UnirestException{
@@ -112,8 +122,9 @@ public class BildModels {
                     .registerTypeAdapter(Films.class, new FilmsDeserializer())
                     .create();
             films = gson.fromJson(responseJsonString, Films.class);
+            this.films.addAllFilms(films);
         }
-        return films;
+        return this.films;
     }
 
     public SpeciesMap bildSpeciesMap() throws UnirestException{
@@ -134,8 +145,9 @@ public class BildModels {
                     .registerTypeAdapter(SpeciesMap.class, new SpeciesDeserializer())
                     .create();
             speciesMap = gson.fromJson(responseJsonString, SpeciesMap.class);
+            this.speciesMap.addAllSpecies(speciesMap);
         }
-        return speciesMap;
+        return this.speciesMap;
     }
 
 }

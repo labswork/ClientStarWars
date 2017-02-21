@@ -23,4 +23,8 @@ public class People {
     public Map<String, Human> getPeoples() {
         return peoples;
     }
+
+    public void getAllPeople(People people){
+        peoples.putAll(people.getPeoples());
+    }
 }

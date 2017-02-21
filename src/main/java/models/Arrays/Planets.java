@@ -21,4 +21,7 @@ public class Planets {
     public Map<String, Planet> getPlanetMap() {
         return planetMap;
     }
+    public void addAllPlanets(Planets planets){
+        planetMap.putAll(planets.getPlanetMap());
+    }
 }

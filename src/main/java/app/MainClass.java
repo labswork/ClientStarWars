@@ -20,10 +20,10 @@ public class MainClass {
         Films films = bildModels.bildFilms();
         SpeciesMap speciesMap = bildModels.bildSpeciesMap();
 
-        Human human = people.getPeople("http://swapi.co/api/people/88/");
-        Planet planet = planets.getPlanet("http://swapi.co/api/planets/61/");
-        Film film = films.getFilm("http://swapi.co/api/films/7/");
-        Species species = speciesMap.getSpesies("http://swapi.co/api/species/37/");
+        Human human = people.getPeople("http://swapi.co/api/people/8/");
+        Planet planet = planets.getPlanet("http://swapi.co/api/planets/6/");
+        Film film = films.getFilm("http://swapi.co/api/films/4/");
+        Species species = speciesMap.getSpesies("http://swapi.co/api/species/7/");
 
         System.out.println(human.getName());
         System.out.println(planet.getName());
