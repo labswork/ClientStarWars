@@ -17,4 +17,8 @@ public class SpeciesMap {
     public Species getSpesies(String url){
         return speciesMap.get(url);
     }
+
+    public Map<String, Species> getSpeciesMap() {
+        return speciesMap;
+    }
 }

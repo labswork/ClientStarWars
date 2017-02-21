@@ -19,4 +19,8 @@ public class People {
     public Human getPeople(String url){
         return peoples.get(url);
     }
+
+    public Map<String, Human> getPeoples() {
+        return peoples;
+    }
 }

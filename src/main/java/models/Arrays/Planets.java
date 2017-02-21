@@ -17,4 +17,8 @@ public class Planets {
     public Planet getPlanet(String url) {
         return planetMap.get(url);
     }
+
+    public Map<String, Planet> getPlanetMap() {
+        return planetMap;
+    }
 }

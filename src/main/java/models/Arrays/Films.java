@@ -17,4 +17,8 @@ public class Films {
     public Film getFilm(String url){
         return filmMap.get(url);
     }
+
+    public void setFilmMap(Map<String, Film> filmMap) {
+        this.filmMap = filmMap;
+    }
 }
