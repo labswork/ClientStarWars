@@ -22,3 +22,4 @@ public class SpeciesDeserializer implements JsonDeserializer<SpeciesMap> {
         return speciesMap;
     }
 }
+//github commit
