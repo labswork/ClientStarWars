@@ -5,14 +5,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import deserialize.FilmsDeserializer;
-import deserialize.PeopleDeserializer;
-import deserialize.PlanetsDeserializer;
-import deserialize.SpeciesDeserializer;
-import models.Arrays.Films;
-import models.Arrays.People;
-import models.Arrays.Planets;
-import models.Arrays.SpeciesMap;
+import deserialize.*;
+import models.Arrays.*;
 import models.Film;
 import models.Planet;
 
@@ -24,6 +18,7 @@ public class BildModels {
     private Planets planets = new Planets();
     private Films films = new Films();
     private SpeciesMap speciesMap = new SpeciesMap();
+    private VehiclesMap vehiclesMap = new VehiclesMap();
 
 
 
@@ -148,6 +143,30 @@ public class BildModels {
             this.speciesMap.addAllSpecies(speciesMap);
         }
         return this.speciesMap;
+    }
+
+    public VehiclesMap bildVehiclesMap() throws UnirestException{
+        VehiclesMap vehiclesMap = new VehiclesMap();
+        String next = "First Start";
+        String url = "http://swapi.co/api/vehicles/";
+
+        while (next != ""){
+            String responseJsonString = requestJsonString(url);
+            if (itLastPage(responseJsonString)){
+                next = "";
+            }
+            else {
+                next = getNextPageLink(responseJsonString);
+                url = next;
+            }
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(VehiclesMap.class, new VehiclesDeserializer())
+                    .create();
+            vehiclesMap = gson.fromJson(responseJsonString, VehiclesMap.class);
+            this.vehiclesMap.addAllVehicles(vehiclesMap);
+        }
+        return this.vehiclesMap;
+
     }
 
 }
