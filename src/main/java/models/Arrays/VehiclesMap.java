@@ -21,6 +21,6 @@ public class VehiclesMap {
         return vehicleMap.get(url);
     }
     public void addAllVehicles(VehiclesMap vehiclesMap){
-        vehicleMap.putAll(vehiclesMap.getVehicleMap());
+        this.vehicleMap.putAll(vehiclesMap.getVehicleMap());
     }
 }

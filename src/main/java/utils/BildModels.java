@@ -19,6 +19,7 @@ public class BildModels {
     private Films films = new Films();
     private SpeciesMap speciesMap = new SpeciesMap();
     private VehiclesMap vehiclesMap = new VehiclesMap();
+    private StarshipsMap starshipsMap = new StarshipsMap();
 
 
 
@@ -166,7 +167,29 @@ public class BildModels {
             this.vehiclesMap.addAllVehicles(vehiclesMap);
         }
         return this.vehiclesMap;
+    }
 
+    public StarshipsMap bildStarshipsMap() throws UnirestException{
+        StarshipsMap starshipsMap = new StarshipsMap();
+        String next = "First Start";
+        String url = "http://swapi.co/api/starships/";
+
+        while (next != ""){
+            String responseJsonString = requestJsonString(url);
+            if (itLastPage(responseJsonString)){
+                next = "";
+            }
+            else {
+                next = getNextPageLink(responseJsonString);
+                url = next;
+            }
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(StarshipsMap.class, new StarshipsDeserializer())
+                    .create();
+            starshipsMap = gson.fromJson(responseJsonString, StarshipsMap.class);
+            this.starshipsMap.addAllStarships(starshipsMap);
+        }
+        return this.starshipsMap;
     }
 
 }

@@ -25,6 +25,6 @@ public class People {
     }
 
     public void getAllPeople(People people){
-        peoples.putAll(people.getPeoples());
+        this.peoples.putAll(people.getPeoples());
     }
 }

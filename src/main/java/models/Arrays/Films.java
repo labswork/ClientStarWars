@@ -23,6 +23,6 @@ public class Films {
     }
 
     public void addAllFilms(Films films){
-        filmMap.putAll(films.getFilmMap());
+        this.filmMap.putAll(films.getFilmMap());
     }
 }
