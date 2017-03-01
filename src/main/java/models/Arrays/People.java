@@ -24,7 +24,7 @@ public class People {
         return peoples;
     }
 
-    public void getAllPeople(People people){
+    public void addAllPeople(People people){
         this.peoples.putAll(people.getPeoples());
     }
 }

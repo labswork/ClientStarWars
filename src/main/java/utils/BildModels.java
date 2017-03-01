@@ -71,7 +71,7 @@ public class BildModels {
                     .registerTypeAdapter(People.class, new PeopleDeserializer())
                     .create();
             people = gson.fromJson(responseJsonString, People.class);
-            this.people.getAllPeople(people);
+            this.people.addAllPeople(people);
         }
         return this.people;
     }
