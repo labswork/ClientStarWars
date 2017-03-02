@@ -9,6 +9,11 @@ import java.util.Map;
  * Created by rootid on 19.02.2017.
  */
 public class Films {
+
+    private Map<String, Object> deserializedObjects = new HashMap<String, Object>();
+    private Map<String, String> linkOnNamesDwserializedObjects = new HashMap<String, String>();
+
+
     private Map<String, Film> filmMap = new HashMap<String, Film>();
 
     public void addFilm(String url, Film film){

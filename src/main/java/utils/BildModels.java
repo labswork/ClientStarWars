@@ -25,6 +25,8 @@ public class BildModels {
 
 
 
+
+
     public String requestJsonString(String url) throws UnirestException{
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
                 .asJson();
