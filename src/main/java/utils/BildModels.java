@@ -16,8 +16,8 @@ public class BildModels {
     public String requestJsonString(String url) throws UnirestException{
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
                 .asJson();
-        System.out.print("body: ");
-        System.out.println(jsonResponse.getBody());
+//        System.out.print("body: ");
+//        System.out.println(jsonResponse.getBody());
         return jsonResponse.getBody().toString();
     }
     public boolean itLastPage(String jsonString){

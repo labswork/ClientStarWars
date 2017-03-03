@@ -17,7 +17,7 @@ public interface ClientInterface {
     Planet getPlanetByID(int id) throws UnirestException;
     List<Planet> getAllPlanets() throws UnirestException;
 
-    Film getFilmByName(String title) throws UnirestException;
+    Film getFilmByTitle(String title) throws UnirestException;
     Film getFilmByID(int id) throws UnirestException;
     List<Film> getAllFilms() throws UnirestException;
 
