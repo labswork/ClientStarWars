@@ -16,12 +16,17 @@ public class Singleton implements ClientInterface {
 
 
     public Human getHumanByName(String name) throws UnirestException {
+        ArrayList<Human> people = getAllPeople();
+        for (int i = 0; i < people.size(); i++) {
+            if (people.get(i).getName().equalsIgnoreCase(name)){
+                return people.get(i);
+            }
+        }
         return null;
     }
 
     public Human getHumanByID(int id) throws UnirestException {
-//        String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
-        String url = "http://swapi.co/api/people/1/";
+        String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -38,23 +43,19 @@ public class Singleton implements ClientInterface {
 
         ArrayList<Human> people = new ArrayList<Human>();
         BildModels bildModels = new BildModels();
-        Gson gson = new Gson();
 
-        String next = url;
         String responseJsonString = bildModels.requestJsonString(url);
 
         while (bildModels.itLastPage(responseJsonString) == false){
-            Human human = new Human();
-            next = bildModels.getNextPageLink(responseJsonString);
-            people.addAll(getOnePage(responseJsonString, Human.class, human));
-            responseJsonString = bildModels.requestJsonString(next);
-
+            url = bildModels.getNextPageLink(responseJsonString);
+            people.addAll(getOnePage(responseJsonString, Human.class));
+            responseJsonString = bildModels.requestJsonString(url);
         }
 
         return people;
     }
 
-    public ArrayList getOnePage(String responseJsonString, Type typeOfT, Object item ) throws UnirestException {
+    public ArrayList getOnePage(String responseJsonString, Type typeOfT) throws UnirestException {
         ArrayList listItems = new ArrayList();
         Gson gson = new Gson();
 
@@ -63,7 +64,7 @@ public class Singleton implements ClientInterface {
         JsonArray jArray = o.getAsJsonArray("results");
 
         for (int i = 0; i < jArray.size(); i++) {
-            item = gson.fromJson(jArray.get(i), typeOfT);
+            Object item = gson.fromJson(jArray.get(i), typeOfT);
             listItems.add(item);
 
         }
