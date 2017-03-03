@@ -34,6 +34,4 @@ public interface ClientInterface {
     List<Starship> getAllStarships() throws UnirestException;
 
 
-
-
 }

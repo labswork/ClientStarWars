@@ -51,15 +51,6 @@ public class Singleton implements ClientInterface {
 
         }
 
-//        JsonParser jsonParser = new JsonParser();
-//        JsonObject o = (JsonObject) jsonParser.parse(responseJsonString);
-//        JsonArray jArray = o.getAsJsonArray("results");
-//
-//        for (int i = 0; i < jArray.size(); i++) {
-//            Human human = gson.fromJson(jArray.get(i), Human.class);
-//            people.add(human);
-//
-//        }
         return people;
     }
 
