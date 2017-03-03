@@ -2,19 +2,29 @@ package app;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
-import models.Arrays.*;
 import utils.BildModels;
 import utils.Singleton;
+
+import java.util.ArrayList;
 
 public class MainClass {
     public static void main(String[] args) throws UnirestException {
 
         Singleton singleton = new Singleton();
 
-        System.out.println(singleton.getAllPeople().size());
-        System.out.println(singleton.getAllPeople().get(0));
 
-        System.out.println(singleton.getHumanByID(1).getName());
+//        Human human = new Human();
+//        ArrayList<Human> people = new ArrayList<Human>();
+//        people.addAll(singleton.getOnePage("http://swapi.co/api/people/", Human.class, human));
+//
+//        System.out.println(people);
+        ArrayList<Human> people = singleton.getAllPeople();
+
+        System.out.println(people.size());
+        System.out.println(people.get(0).getName());
+        System.out.println(people.get(79).getUrl());
+//
+//        System.out.println(singleton.getHumanByID(1).getName());
 
 
 

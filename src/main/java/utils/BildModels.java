@@ -5,8 +5,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import deserialize.*;
-import models.Arrays.*;
 import models.Film;
 import models.Planet;
 
@@ -14,14 +12,6 @@ import models.Planet;
  * Created by rootid on 19.02.2017.
  */
 public class BildModels {
-    private People people = new People();
-    private Planets planets = new Planets();
-    private Films films = new Films();
-    private SpeciesMap speciesMap = new SpeciesMap();
-    private VehiclesMap vehiclesMap = new VehiclesMap();
-    private StarshipsMap starshipsMap = new StarshipsMap();
-
-
 
 
 
@@ -51,7 +41,7 @@ public class BildModels {
     }
 
 
-
+/*
 
     public People bildPeople() throws UnirestException{
         String url = "http://swapi.co/api/people/";
@@ -192,6 +182,6 @@ public class BildModels {
             this.starshipsMap.addAllStarships(starshipsMap);
         }
         return this.starshipsMap;
-    }
+    }*/
 
 }

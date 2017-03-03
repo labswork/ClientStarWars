@@ -2,9 +2,9 @@ package utils;
 
 import com.google.gson.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import deserialize.PeopleDeserializer;
 import models.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -24,8 +24,7 @@ public class Singleton implements ClientInterface {
         String url = "http://swapi.co/api/people/1/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = new String();
-        responseJsonString = bildModels.requestJsonString(url);
+        String responseJsonString = bildModels.requestJsonString(url);
 
         Gson gson = new Gson();
 
@@ -34,18 +33,50 @@ public class Singleton implements ClientInterface {
     }
 
     public ArrayList<Human> getAllPeople() throws UnirestException {
-        String url = this.swapiURL + "people/";
-//        String url = "http://swapi.co/api/people/";
-        BildModels bildModels = new BildModels();
 
+        String url = this.swapiURL + "people/";
+
+        ArrayList<Human> people = new ArrayList<Human>();
+        BildModels bildModels = new BildModels();
+        Gson gson = new Gson();
+
+        String next = url;
         String responseJsonString = bildModels.requestJsonString(url);
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(ArrayList.class, new PeopleDeserializer())
-                .create();
-        return gson.fromJson(responseJsonString, ArrayList.class);
+        while (bildModels.itLastPage(responseJsonString) == false){
+            Human human = new Human();
+            next = bildModels.getNextPageLink(responseJsonString);
+            people.addAll(getOnePage(responseJsonString, Human.class, human));
+            responseJsonString = bildModels.requestJsonString(next);
 
+        }
 
+//        JsonParser jsonParser = new JsonParser();
+//        JsonObject o = (JsonObject) jsonParser.parse(responseJsonString);
+//        JsonArray jArray = o.getAsJsonArray("results");
+//
+//        for (int i = 0; i < jArray.size(); i++) {
+//            Human human = gson.fromJson(jArray.get(i), Human.class);
+//            people.add(human);
+//
+//        }
+        return people;
+    }
+
+    public ArrayList getOnePage(String responseJsonString, Type typeOfT, Object item ) throws UnirestException {
+        ArrayList listItems = new ArrayList();
+        Gson gson = new Gson();
+
+        JsonParser jsonParser = new JsonParser();
+        JsonObject o = (JsonObject) jsonParser.parse(responseJsonString);
+        JsonArray jArray = o.getAsJsonArray("results");
+
+        for (int i = 0; i < jArray.size(); i++) {
+            item = gson.fromJson(jArray.get(i), typeOfT);
+            listItems.add(item);
+
+        }
+        return listItems;
     }
 
 
