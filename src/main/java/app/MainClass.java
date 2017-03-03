@@ -4,9 +4,17 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 import models.Arrays.*;
 import utils.BildModels;
+import utils.Singleton;
 
 public class MainClass {
     public static void main(String[] args) throws UnirestException {
+
+        Singleton singleton = new Singleton();
+
+        System.out.println(singleton.getAllPeople().size());
+        System.out.println(singleton.getAllPeople().get(0));
+
+        System.out.println(singleton.getHumanByID(1).getName());
 
 
 
