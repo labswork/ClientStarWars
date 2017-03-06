@@ -9,29 +9,29 @@ import java.util.List;
  * Created by vgorokhov on 02.03.2017.
  */
 public interface ClientInterface {
-    People getHumanByName (String name) throws UnirestException;
-    People getHumanByID(int id) throws UnirestException;
-    List<People> getAllPeople() throws UnirestException;
+    People getHumanByName (String name);
+    People getHumanByID(int id) ;
+    List<People> getAllPeople() ;
 
-    Planet getPlanetByName(String name) throws UnirestException;
-    Planet getPlanetByID(int id) throws UnirestException;
-    List<Planet> getAllPlanets() throws UnirestException;
+    Planet getPlanetByName(String name) ;
+    Planet getPlanetByID(int id) ;
+    List<Planet> getAllPlanets() ;
 
-    Film getFilmByTitle(String title) throws UnirestException;
-    Film getFilmByID(int id) throws UnirestException;
-    List<Film> getAllFilms() throws UnirestException;
+    Film getFilmByTitle(String title) ;
+    Film getFilmByID(int id) ;
+    List<Film> getAllFilms() ;
 
-    Species getSpeciesByName(String name) throws UnirestException;
-    Species getSpeciesByID(int id) throws UnirestException;
-    List<Species> getAllSpecies() throws UnirestException;
+    Species getSpeciesByName(String name) ;
+    Species getSpeciesByID(int id) ;
+    List<Species> getAllSpecies() ;
 
-    Vehicle getVehicleByName(String name) throws UnirestException;
-    Vehicle getVehicleByID(int id) throws UnirestException;
-    List<Vehicle> getAllVehicles() throws UnirestException;
+    Vehicle getVehicleByName(String name) ;
+    Vehicle getVehicleByID(int id) ;
+    List<Vehicle> getAllVehicles() ;
 
-    Starship getStarshipByName(String name) throws UnirestException;
-    Starship getStarshipByID(int id) throws UnirestException;
-    List<Starship> getAllStarships() throws UnirestException;
+    Starship getStarshipByName(String name) ;
+    Starship getStarshipByID(int id) ;
+    List<Starship> getAllStarships() ;
 
 
 }
