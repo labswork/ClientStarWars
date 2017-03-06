@@ -6,6 +6,7 @@ import models.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vgorokhov on 02.03.2017.
@@ -16,8 +17,10 @@ public class Singleton implements ClientInterface {
 
 
 
-    public ArrayList getOnePage(String responseJsonString, Type typeOfT) throws UnirestException {
-        ArrayList listItems = new ArrayList();
+
+    public <T> List<T> getOnePage(String responseJsonString, T t) throws UnirestException {
+
+        ArrayList<T> listItems = new ArrayList<T>();
         Gson gson = new Gson();
 
         JsonParser jsonParser = new JsonParser();
@@ -25,7 +28,7 @@ public class Singleton implements ClientInterface {
         JsonArray jArray = o.getAsJsonArray("results");
 
         for (int i = 0; i < jArray.size(); i++) {
-            Object item = gson.fromJson(jArray.get(i), typeOfT);
+            T item = (T) gson.fromJson(jArray.get(i), t.getClass());
             listItems.add(item);
         }
         return listItems;
@@ -36,8 +39,8 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Human getHumanByName(String name) throws UnirestException {
-        ArrayList<Human> people = getAllPeople();
+    public People getHumanByName(String name) throws UnirestException {
+        ArrayList<People> people = getAllPeople();
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).getName().equalsIgnoreCase(name)){
                 return people.get(i);
@@ -46,7 +49,7 @@ public class Singleton implements ClientInterface {
         return null;
     }
 
-    public Human getHumanByID(int id) throws UnirestException {
+    public People getHumanByID(int id) throws UnirestException {
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
@@ -54,15 +57,16 @@ public class Singleton implements ClientInterface {
 
         Gson gson = new Gson();
 
-        return gson.fromJson(responseJsonString, Human.class);
+        return gson.fromJson(responseJsonString, People.class);
 
     }
 
-    public ArrayList<Human> getAllPeople() throws UnirestException {
+    public ArrayList<People> getAllPeople() throws UnirestException {
 
         String url = this.swapiURL + "people/";
 
-        ArrayList<Human> people = new ArrayList<Human>();
+        ArrayList<People> people = new ArrayList<People>();
+        People human = new People();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -71,8 +75,9 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            people.addAll(getOnePage(responseJsonString, Human.class));
+            people.addAll(getOnePage(responseJsonString, human));
             responseJsonString = bildModels.requestJsonString(url);
+
         }
         return people;
     }
@@ -108,6 +113,7 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "planets/";
 
         ArrayList<Planet> planets = new ArrayList<Planet>();
+        Planet planet = new Planet();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -116,7 +122,7 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            planets.addAll(getOnePage(responseJsonString, Planet.class));
+            planets.addAll(getOnePage(responseJsonString, planet));
             responseJsonString = bildModels.requestJsonString(url);
         }
         return planets;
@@ -152,6 +158,7 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "films/";
 
         ArrayList<Film> films = new ArrayList<Film>();
+        Film film = new Film();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -160,7 +167,7 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            films.addAll(getOnePage(responseJsonString, Film.class));
+            films.addAll(getOnePage(responseJsonString, film));
             responseJsonString = bildModels.requestJsonString(url);
         }
         return films;
@@ -195,6 +202,7 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "species/";
 
         ArrayList<Species> species = new ArrayList<Species>();
+        Species oneSpecies = new Species();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -203,7 +211,7 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            species.addAll(getOnePage(responseJsonString, Species.class));
+            species.addAll(getOnePage(responseJsonString, oneSpecies));
             responseJsonString = bildModels.requestJsonString(url);
         }
         return species;
@@ -238,6 +246,7 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "vehicles/";
 
         ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        Vehicle oneVehicle = new Vehicle();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -246,7 +255,7 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            vehicles.addAll(getOnePage(responseJsonString, Vehicle.class));
+            vehicles.addAll(getOnePage(responseJsonString, oneVehicle));
             responseJsonString = bildModels.requestJsonString(url);
         }
         return vehicles;
@@ -281,6 +290,7 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "starships/";
 
         ArrayList<Starship> starships = new ArrayList<Starship>();
+        Starship oneStarship = new Starship();
         BildModels bildModels = new BildModels();
 
         String responseJsonString = bildModels.requestJsonString(url);
@@ -289,7 +299,7 @@ public class Singleton implements ClientInterface {
         while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
             FirstStart = false;
             if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
-            starships.addAll(getOnePage(responseJsonString, Starship.class));
+            starships.addAll(getOnePage(responseJsonString, oneStarship));
             responseJsonString = bildModels.requestJsonString(url);
         }
         return starships;

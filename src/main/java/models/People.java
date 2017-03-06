@@ -1,16 +1,12 @@
 package models;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by rootid on 13.02.2017.
  */
-public class Human{
+public class People {
 
     private String name;
     private String height;
@@ -29,7 +25,7 @@ public class Human{
 
     private String url;
 
-    public Human() {
+    public People() {
 
     }
 

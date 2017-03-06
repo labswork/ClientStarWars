@@ -12,6 +12,10 @@ public class MainClass {
 
         Singleton singleton = new Singleton();
 
+
+//        singleton.getAllPeople();
+
+///*
         String namePeople = "luke skywalker";
         String namePlanet = "Alderaan";
         String titleFilm = "A New Hope";
@@ -26,10 +30,7 @@ public class MainClass {
         System.out.println(singleton.getVehicleByName(nameVehicle).getUrl());
         System.out.println(singleton.getStarshipByName(nameStarship).getUrl());
 
-//        System.out.println(people.size());
-//        System.out.println(people.get(0).getName());
-//        System.out.println(people.get(79).getUrl());
-//
+
         String string = singleton.getHumanByID(1).getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
@@ -60,7 +61,7 @@ public class MainClass {
         System.out.print(" соответвует ссылке: ");
         System.out.println(nameStarship.equalsIgnoreCase(string));
 
-
+//*/
 
 
     }

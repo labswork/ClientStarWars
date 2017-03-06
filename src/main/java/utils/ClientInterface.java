@@ -9,9 +9,9 @@ import java.util.List;
  * Created by vgorokhov on 02.03.2017.
  */
 public interface ClientInterface {
-    Human getHumanByName (String name) throws UnirestException;
-    Human getHumanByID(int id) throws UnirestException;
-    List<Human> getAllPeople() throws UnirestException;
+    People getHumanByName (String name) throws UnirestException;
+    People getHumanByID(int id) throws UnirestException;
+    List<People> getAllPeople() throws UnirestException;
 
     Planet getPlanetByName(String name) throws UnirestException;
     Planet getPlanetByID(int id) throws UnirestException;
