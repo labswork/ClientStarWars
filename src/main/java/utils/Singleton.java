@@ -83,9 +83,9 @@ public class Singleton implements ClientInterface {
         }
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             people.addAll(getOnePage(responseJsonString, human));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
@@ -144,9 +144,9 @@ public class Singleton implements ClientInterface {
         }
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             planets.addAll(getOnePage(responseJsonString, planet));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
@@ -203,9 +203,9 @@ public class Singleton implements ClientInterface {
         }
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             films.addAll(getOnePage(responseJsonString, film));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
@@ -261,9 +261,9 @@ public class Singleton implements ClientInterface {
         }
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             species.addAll(getOnePage(responseJsonString, oneSpecies));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
@@ -321,9 +321,9 @@ public class Singleton implements ClientInterface {
 
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             vehicles.addAll(getOnePage(responseJsonString, oneVehicle));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
@@ -380,9 +380,9 @@ public class Singleton implements ClientInterface {
         }
 
         boolean FirstStart = true;
-        while ((bildModels.itLastPage(responseJsonString) == false) || FirstStart){
+        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (bildModels.itLastPage(responseJsonString) == false) url = bildModels.getNextPageLink(responseJsonString);
+            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
             starships.addAll(getOnePage(responseJsonString, oneStarship));
             try {
                 responseJsonString = bildModels.requestJsonString(url);
