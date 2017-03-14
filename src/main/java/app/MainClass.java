@@ -1,21 +1,21 @@
 package app;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import jdk.nashorn.internal.runtime.options.Option;
 import models.*;
 import utils.BildModels;
 import utils.Singleton;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MainClass {
     public static void main(String[] args) throws UnirestException {
 
-        Singleton singleton = new Singleton();
-
-
-//        singleton.getAllPeople();
 
 ///*
+        Singleton singleton = new Singleton();
+
         String namePeople = "luke skywalker";
         String namePlanet = "Alderaan";
         String titleFilm = "A New Hope";
@@ -31,7 +31,7 @@ public class MainClass {
         System.out.println(singleton.getStarshipByName(nameStarship).getUrl());
 
 
-        String string = singleton.getHumanByID(1).getName();
+        String string = singleton.getHumanByID(1).get().getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(namePeople.equalsIgnoreCase(string));
@@ -65,5 +65,6 @@ public class MainClass {
 
 
     }
+
 
 }

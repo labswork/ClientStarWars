@@ -4,13 +4,14 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by vgorokhov on 02.03.2017.
  */
 public interface ClientInterface {
     People getHumanByName (String name);
-    People getHumanByID(int id) ;
+    Optional<People> getHumanByID(int id) ;
     List<People> getAllPeople() ;
 
     Planet getPlanetByName(String name) ;

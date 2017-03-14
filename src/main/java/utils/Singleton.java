@@ -7,6 +7,7 @@ import models.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by vgorokhov on 02.03.2017.
@@ -49,22 +50,22 @@ public class Singleton implements ClientInterface {
         return null;
     }
 
-    public People getHumanByID(int id){
+    public Optional<People> getHumanByID(int id){
+
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
-        People people = new People();
 
-        String responseJsonString = null;
         try {
+            String responseJsonString;
             responseJsonString = bildModels.requestJsonString(url);
             Gson gson = new Gson();
-            people = gson.fromJson(responseJsonString, People.class);
+            People people = gson.fromJson(responseJsonString, People.class);
+
+            return Optional.of(people);
         } catch (UnirestException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
-
-        return people;
-
     }
 
     public ArrayList<People> getAllPeople()  {
