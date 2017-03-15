@@ -30,11 +30,15 @@ public class MainClass {
         System.out.println(singleton.getVehicleByName(nameVehicle).getUrl());
         System.out.println(singleton.getStarshipByName(nameStarship).getUrl());
 
+        String string = "";
 
-        String string = singleton.getHumanByID(1).get().getName();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(namePeople.equalsIgnoreCase(string));
+        Optional<People> peopleOptional = singleton.getHumanByID(1);
+        if (peopleOptional.isPresent()) {
+            string = peopleOptional.get().getName();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(namePeople.equalsIgnoreCase(string));
+        }
 
         string = singleton.getPlanetByID(2).getName();
         System.out.print(string);

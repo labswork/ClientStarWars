@@ -55,17 +55,15 @@ public class Singleton implements ClientInterface {
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
+        People people = null;
         try {
-            String responseJsonString;
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
             Gson gson = new Gson();
-            People people = gson.fromJson(responseJsonString, People.class);
-
-            return Optional.of(people);
+            people = gson.fromJson(responseJsonString, People.class);
         } catch (UnirestException e) {
             e.printStackTrace();
-            return Optional.empty();
         }
+        return Optional.ofNullable(people);
     }
 
     public ArrayList<People> getAllPeople()  {
