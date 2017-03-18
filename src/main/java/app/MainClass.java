@@ -13,6 +13,8 @@ public class MainClass {
     public static void main(String[] args) throws UnirestException {
 
 
+
+
 ///*
         Singleton singleton = new Singleton();
 
@@ -23,12 +25,13 @@ public class MainClass {
         String nameVehicle = "Sand Crawler";
         String nameStarship = "Sentinel-class landing craft";
 
-        System.out.println(singleton.getHumanByName(namePeople).getUrl());
-        System.out.println(singleton.getPlanetByName(namePlanet).getUrl());
-        System.out.println(singleton.getFilmByTitle(titleFilm).getUrl());
-        System.out.println(singleton.getSpeciesByName(nameSpecies).getUrl());
-        System.out.println(singleton.getVehicleByName(nameVehicle).getUrl());
-        System.out.println(singleton.getStarshipByName(nameStarship).getUrl());
+
+        System.out.println(singleton.getHumanByName(namePeople).get().getUrl());
+        System.out.println(singleton.getPlanetByName(namePlanet).get().getUrl());
+        System.out.println(singleton.getFilmByTitle(titleFilm).get().getUrl());
+        System.out.println(singleton.getSpeciesByName(nameSpecies).get().getUrl());
+        System.out.println(singleton.getVehicleByName(nameVehicle).get().getUrl());
+        System.out.println(singleton.getStarshipByName(nameStarship).get().getUrl());
 
         String string = "";
 
@@ -40,27 +43,27 @@ public class MainClass {
             System.out.println(namePeople.equalsIgnoreCase(string));
         }
 
-        string = singleton.getPlanetByID(2).getName();
+        string = singleton.getPlanetByID(2).get().getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(namePlanet.equalsIgnoreCase(string));
 
-        string = singleton.getFilmByID(1).getTitle();
+        string = singleton.getFilmByID(1).get().getTitle();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(titleFilm.equalsIgnoreCase(string));
 
-        string = singleton.getSpeciesByID(5).getName();
+        string = singleton.getSpeciesByID(5).get().getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(nameSpecies.equalsIgnoreCase(string));
 
-        string = singleton.getVehicleByID(4).getName();
+        string = singleton.getVehicleByID(4).get().getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(nameVehicle.equalsIgnoreCase(string));
 
-        string = singleton.getStarshipByID(5).getName();
+        string = singleton.getStarshipByID(5).get().getName();
         System.out.print(string);
         System.out.print(" соответвует ссылке: ");
         System.out.println(nameStarship.equalsIgnoreCase(string));

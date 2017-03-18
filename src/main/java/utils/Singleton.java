@@ -40,14 +40,9 @@ public class Singleton implements ClientInterface {
 
 
 
-    public People getHumanByName(String name){
+    public Optional<People> getHumanByName(String name){
         ArrayList<People> people = getAllPeople();
-        for (int i = 0; i < people.size(); i++) {
-            if (people.get(i).getName().equalsIgnoreCase(name)){
-                return people.get(i);
-            }
-        }
-        return null;
+        return people.stream().filter((people1 -> people1.getName().equalsIgnoreCase(name))).findFirst();
     }
 
     public Optional<People> getHumanByID(int id){
@@ -73,6 +68,7 @@ public class Singleton implements ClientInterface {
         ArrayList<People> people = new ArrayList<People>();
         People human = new People();
         BildModels bildModels = new BildModels();
+
 
         String responseJsonString = null;
         try {
@@ -102,30 +98,25 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Planet getPlanetByName(String name)  {
+    public Optional<Planet> getPlanetByName(String name)  {
         ArrayList<Planet> planets = getAllPlanets();
-        for (int i = 0; i < planets.size(); i++) {
-            if (planets.get(i).getName().equalsIgnoreCase(name)){
-                return planets.get(i);
-            }
-        }
-        return null;
+        return planets.stream().filter(planet -> planet.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public Planet getPlanetByID(int id)  {
+    public Optional<Planet> getPlanetByID(int id)  {
         String url = this.swapiURL + "planets/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = null;
+        Planet planet = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
+            Gson gson = new Gson();
+            planet = gson.fromJson(responseJsonString, Planet.class);
+
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(responseJsonString, Planet.class);
+        return Optional.ofNullable(planet);
     }
 
     public ArrayList<Planet> getAllPlanets()  {
@@ -160,32 +151,27 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Film getFilmByTitle(String title)  {
+    public Optional<Film> getFilmByTitle(String title)  {
         ArrayList<Film> films = getAllFilms();
-        for (int i = 0; i < films.size(); i++) {
-            if (films.get(i).getTitle().equalsIgnoreCase(title)){
-                return films.get(i);
-            }
-        }
-        return null;
+        return films.stream().filter(film -> film.getTitle().equalsIgnoreCase(title)).findFirst();
     }
 
-    public Film getFilmByID(int id)  {
+    public Optional<Film> getFilmByID(int id)  {
         String url = this.swapiURL + "films/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = null;
+        Film film = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
+            Gson gson = new Gson();
+             film = gson.fromJson(responseJsonString, Film.class);
+
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(responseJsonString, Film.class);
-
+        return Optional.ofNullable(film);
     }
+
 
     public ArrayList<Film> getAllFilms()  {
         String url = this.swapiURL + "films/";
@@ -219,31 +205,27 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Species getSpeciesByName(String name)  {
+    public Optional<Species> getSpeciesByName(String name)  {
         ArrayList<Species> species = getAllSpecies();
-        for (int i = 0; i < species.size(); i++) {
-            if (species.get(i).getName().equalsIgnoreCase(name)){
-                return species.get(i);
-            }
-        }
-        return null;
+        return species.stream().filter(species1 -> species1.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public Species getSpeciesByID(int id)  {
+    public Optional<Species> getSpeciesByID(int id)  {
         String url = this.swapiURL + "species/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = null;
+        Species species = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
+            Gson gson = new Gson();
+            species = gson.fromJson(responseJsonString, Species.class);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(responseJsonString, Species.class);
+        return Optional.ofNullable(species);
     }
+
+
 
     public ArrayList<Species> getAllSpecies()  {
         String url = this.swapiURL + "species/";
@@ -277,30 +259,24 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Vehicle getVehicleByName(String name)  {
+    public Optional<Vehicle> getVehicleByName(String name)  {
         ArrayList<Vehicle> vehicles = getAllVehicles();
-        for (int i = 0; i < vehicles.size(); i++) {
-            if (vehicles.get(i).getName().equalsIgnoreCase(name)){
-                return vehicles.get(i);
-            }
-        }
-        return null;
+        return vehicles.stream().filter(vehicle -> vehicle.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public Vehicle getVehicleByID(int id)  {
+    public Optional<Vehicle> getVehicleByID(int id)  {
         String url = this.swapiURL + "vehicles/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = null;
+        Vehicle vehicle = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
+            Gson gson = new Gson();
+            vehicle = gson.fromJson(responseJsonString, Vehicle.class);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(responseJsonString, Vehicle.class);
+        return Optional.ofNullable(vehicle);
     }
 
     public ArrayList<Vehicle> getAllVehicles()  {
@@ -338,30 +314,24 @@ public class Singleton implements ClientInterface {
 
 
 
-    public Starship getStarshipByName(String name)  {
+    public Optional<Starship> getStarshipByName(String name)  {
         ArrayList<Starship> starships = getAllStarships();
-        for (int i = 0; i < starships.size(); i++) {
-            if (starships.get(i).getName().equalsIgnoreCase(name)){
-                return starships.get(i);
-            }
-        }
-        return null;
+        return starships.stream().filter(starship -> starship.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public Starship getStarshipByID(int id)  {
+    public Optional<Starship> getStarshipByID(int id)  {
         String url = this.swapiURL + "starships/" + Integer.toString(id) + "/";
         BildModels bildModels = new BildModels();
 
-        String responseJsonString = null;
+        Starship starship = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = bildModels.requestJsonString(url);
+            Gson gson = new Gson();
+            starship = gson.fromJson(responseJsonString, Starship.class);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-
-        Gson gson = new Gson();
-
-        return gson.fromJson(responseJsonString, Starship.class);
+        return Optional.ofNullable(starship);
     }
 
     public ArrayList<Starship> getAllStarships()  {

@@ -10,28 +10,28 @@ import java.util.Optional;
  * Created by vgorokhov on 02.03.2017.
  */
 public interface ClientInterface {
-    People getHumanByName (String name);
+    Optional<People> getHumanByName (String name);
     Optional<People> getHumanByID(int id) ;
     List<People> getAllPeople() ;
 
-    Planet getPlanetByName(String name) ;
-    Planet getPlanetByID(int id) ;
+    Optional<Planet> getPlanetByName(String name) ;
+    Optional<Planet> getPlanetByID(int id) ;
     List<Planet> getAllPlanets() ;
 
-    Film getFilmByTitle(String title) ;
-    Film getFilmByID(int id) ;
+    Optional<Film> getFilmByTitle(String title) ;
+    Optional<Film> getFilmByID(int id) ;
     List<Film> getAllFilms() ;
 
-    Species getSpeciesByName(String name) ;
-    Species getSpeciesByID(int id) ;
+    Optional<Species> getSpeciesByName(String name) ;
+    Optional<Species> getSpeciesByID(int id) ;
     List<Species> getAllSpecies() ;
 
-    Vehicle getVehicleByName(String name) ;
-    Vehicle getVehicleByID(int id) ;
+    Optional<Vehicle> getVehicleByName(String name) ;
+    Optional<Vehicle> getVehicleByID(int id) ;
     List<Vehicle> getAllVehicles() ;
 
-    Starship getStarshipByName(String name) ;
-    Starship getStarshipByID(int id) ;
+    Optional<Starship> getStarshipByName(String name) ;
+    Optional<Starship> getStarshipByID(int id) ;
     List<Starship> getAllStarships() ;
 
 
