@@ -1,6 +1,5 @@
 package utils;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 
 import java.util.List;
@@ -10,8 +9,8 @@ import java.util.Optional;
  * Created by vgorokhov on 02.03.2017.
  */
 public interface ClientInterface {
-    Optional<People> getHumanByName (String name);
-    Optional<People> getHumanByID(int id) ;
+    Optional<People> getPeopleByName (String name);
+    Optional<People> getPeopleByID(int id) ;
     List<People> getAllPeople() ;
 
     Optional<Planet> getPlanetByName(String name) ;

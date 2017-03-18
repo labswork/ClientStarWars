@@ -4,7 +4,6 @@ import com.google.gson.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,16 +11,14 @@ import java.util.Optional;
 /**
  * Created by vgorokhov on 02.03.2017.
  */
-public class Singleton implements ClientInterface {
+public class Client implements ClientInterface {
 
     private String swapiURL = "http://swapi.co/api/";
 
 
+    private <T> List<T> getOnePage(String responseJsonString, T t)  {
 
-
-    public <T> List<T> getOnePage(String responseJsonString, T t)  {
-
-        ArrayList<T> listItems = new ArrayList<T>();
+        List<T> listItems = new ArrayList<>();
         Gson gson = new Gson();
 
         JsonParser jsonParser = new JsonParser();
@@ -36,23 +33,17 @@ public class Singleton implements ClientInterface {
     }
 
 
-
-
-
-
-    public Optional<People> getHumanByName(String name){
-        ArrayList<People> people = getAllPeople();
+    public Optional<People> getPeopleByName(String name){
+        List<People> people = getAllPeople();
         return people.stream().filter((people1 -> people1.getName().equalsIgnoreCase(name))).findFirst();
     }
 
-    public Optional<People> getHumanByID(int id){
+    public Optional<People> getPeopleByID(int id){
 
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
-
         People people = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
             people = gson.fromJson(responseJsonString, People.class);
         } catch (UnirestException e) {
@@ -61,29 +52,25 @@ public class Singleton implements ClientInterface {
         return Optional.ofNullable(people);
     }
 
-    public ArrayList<People> getAllPeople()  {
-
+    public List<People> getAllPeople()  {
         String url = this.swapiURL + "people/";
-
-        ArrayList<People> people = new ArrayList<People>();
-        People human = new People();
-        BildModels bildModels = new BildModels();
-
+        List<People> people = new ArrayList<>();
+        People onePeople = new People();
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
-            people.addAll(getOnePage(responseJsonString, human));
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
+            people.addAll(getOnePage(responseJsonString, onePeople));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -99,17 +86,17 @@ public class Singleton implements ClientInterface {
 
 
     public Optional<Planet> getPlanetByName(String name)  {
-        ArrayList<Planet> planets = getAllPlanets();
+        List<Planet> planets = getAllPlanets();
         return planets.stream().filter(planet -> planet.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     public Optional<Planet> getPlanetByID(int id)  {
         String url = this.swapiURL + "planets/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
+        
 
         Planet planet = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
             planet = gson.fromJson(responseJsonString, Planet.class);
 
@@ -119,27 +106,27 @@ public class Singleton implements ClientInterface {
         return Optional.ofNullable(planet);
     }
 
-    public ArrayList<Planet> getAllPlanets()  {
+    public List<Planet> getAllPlanets()  {
         String url = this.swapiURL + "planets/";
 
-        ArrayList<Planet> planets = new ArrayList<Planet>();
+        List<Planet> planets = new ArrayList<>();
         Planet planet = new Planet();
-        BildModels bildModels = new BildModels();
+        
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
             planets.addAll(getOnePage(responseJsonString, planet));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -152,17 +139,17 @@ public class Singleton implements ClientInterface {
 
 
     public Optional<Film> getFilmByTitle(String title)  {
-        ArrayList<Film> films = getAllFilms();
+        List<Film> films = getAllFilms();
         return films.stream().filter(film -> film.getTitle().equalsIgnoreCase(title)).findFirst();
     }
 
     public Optional<Film> getFilmByID(int id)  {
         String url = this.swapiURL + "films/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
+        
 
         Film film = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
              film = gson.fromJson(responseJsonString, Film.class);
 
@@ -173,27 +160,27 @@ public class Singleton implements ClientInterface {
     }
 
 
-    public ArrayList<Film> getAllFilms()  {
+    public List<Film> getAllFilms()  {
         String url = this.swapiURL + "films/";
 
-        ArrayList<Film> films = new ArrayList<Film>();
+        List<Film> films = new ArrayList<>();
         Film film = new Film();
-        BildModels bildModels = new BildModels();
+        
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
             films.addAll(getOnePage(responseJsonString, film));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -206,17 +193,17 @@ public class Singleton implements ClientInterface {
 
 
     public Optional<Species> getSpeciesByName(String name)  {
-        ArrayList<Species> species = getAllSpecies();
+        List<Species> species = getAllSpecies();
         return species.stream().filter(species1 -> species1.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     public Optional<Species> getSpeciesByID(int id)  {
         String url = this.swapiURL + "species/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
+        
 
         Species species = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
             species = gson.fromJson(responseJsonString, Species.class);
         } catch (UnirestException e) {
@@ -227,27 +214,27 @@ public class Singleton implements ClientInterface {
 
 
 
-    public ArrayList<Species> getAllSpecies()  {
+    public List<Species> getAllSpecies()  {
         String url = this.swapiURL + "species/";
 
-        ArrayList<Species> species = new ArrayList<Species>();
+        List<Species> species = new ArrayList<>();
         Species oneSpecies = new Species();
-        BildModels bildModels = new BildModels();
+        
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
             species.addAll(getOnePage(responseJsonString, oneSpecies));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -260,17 +247,17 @@ public class Singleton implements ClientInterface {
 
 
     public Optional<Vehicle> getVehicleByName(String name)  {
-        ArrayList<Vehicle> vehicles = getAllVehicles();
+        List<Vehicle> vehicles = getAllVehicles();
         return vehicles.stream().filter(vehicle -> vehicle.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     public Optional<Vehicle> getVehicleByID(int id)  {
         String url = this.swapiURL + "vehicles/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
+        
 
         Vehicle vehicle = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
             vehicle = gson.fromJson(responseJsonString, Vehicle.class);
         } catch (UnirestException e) {
@@ -279,29 +266,29 @@ public class Singleton implements ClientInterface {
         return Optional.ofNullable(vehicle);
     }
 
-    public ArrayList<Vehicle> getAllVehicles()  {
+    public List<Vehicle> getAllVehicles()  {
         String url = this.swapiURL + "vehicles/";
 
-        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        List<Vehicle> vehicles = new ArrayList<>();
         Vehicle oneVehicle = new Vehicle();
-        BildModels bildModels = new BildModels();
+        
 
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
             vehicles.addAll(getOnePage(responseJsonString, oneVehicle));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -315,17 +302,17 @@ public class Singleton implements ClientInterface {
 
 
     public Optional<Starship> getStarshipByName(String name)  {
-        ArrayList<Starship> starships = getAllStarships();
+        List<Starship> starships = getAllStarships();
         return starships.stream().filter(starship -> starship.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     public Optional<Starship> getStarshipByID(int id)  {
         String url = this.swapiURL + "starships/" + Integer.toString(id) + "/";
-        BildModels bildModels = new BildModels();
+        
 
         Starship starship = null;
         try {
-            String responseJsonString = bildModels.requestJsonString(url);
+            String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
             starship = gson.fromJson(responseJsonString, Starship.class);
         } catch (UnirestException e) {
@@ -334,27 +321,26 @@ public class Singleton implements ClientInterface {
         return Optional.ofNullable(starship);
     }
 
-    public ArrayList<Starship> getAllStarships()  {
+    public List<Starship> getAllStarships()  {
         String url = this.swapiURL + "starships/";
 
-        ArrayList<Starship> starships = new ArrayList<Starship>();
+        List<Starship> starships = new ArrayList<>();
         Starship oneStarship = new Starship();
-        BildModels bildModels = new BildModels();
 
         String responseJsonString = null;
         try {
-            responseJsonString = bildModels.requestJsonString(url);
+            responseJsonString = BuildModels.requestJsonString(url);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
         boolean FirstStart = true;
-        while ((!bildModels.itLastPage(responseJsonString)) || FirstStart){
+        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
             FirstStart = false;
-            if (!bildModels.itLastPage(responseJsonString)) url = bildModels.getNextPageLink(responseJsonString);
+            if (!BuildModels.itLastPage(responseJsonString)) url = BuildModels.getNextPageLink(responseJsonString);
             starships.addAll(getOnePage(responseJsonString, oneStarship));
             try {
-                responseJsonString = bildModels.requestJsonString(url);
+                responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }

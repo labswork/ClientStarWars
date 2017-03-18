@@ -1,12 +1,9 @@
 package app;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import jdk.nashorn.internal.runtime.options.Option;
 import models.*;
-import utils.BildModels;
-import utils.Singleton;
+import utils.Client;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class MainClass {
@@ -16,7 +13,7 @@ public class MainClass {
 
 
 ///*
-        Singleton singleton = new Singleton();
+        Client singleton = new Client();
 
         String namePeople = "luke skywalker";
         String namePlanet = "Alderaan";
@@ -26,7 +23,7 @@ public class MainClass {
         String nameStarship = "Sentinel-class landing craft";
 
 
-        System.out.println(singleton.getHumanByName(namePeople).get().getUrl());
+        System.out.println(singleton.getPeopleByName(namePeople).get().getUrl());
         System.out.println(singleton.getPlanetByName(namePlanet).get().getUrl());
         System.out.println(singleton.getFilmByTitle(titleFilm).get().getUrl());
         System.out.println(singleton.getSpeciesByName(nameSpecies).get().getUrl());
@@ -35,7 +32,7 @@ public class MainClass {
 
         String string = "";
 
-        Optional<People> peopleOptional = singleton.getHumanByID(1);
+        Optional<People> peopleOptional = singleton.getPeopleByID(1);
         if (peopleOptional.isPresent()) {
             string = peopleOptional.get().getName();
             System.out.print(string);
