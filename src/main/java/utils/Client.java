@@ -81,10 +81,6 @@ public class Client implements ClientInterface {
 
 
 
-
-
-
-
     public Optional<Planet> getPlanetByName(String name)  {
         List<Planet> planets = getAllPlanets();
         return planets.stream().filter(planet -> planet.getName().equalsIgnoreCase(name)).findFirst();
