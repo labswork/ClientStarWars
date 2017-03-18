@@ -56,6 +56,17 @@ public class Client implements ClientInterface {
         return list;
     }
 
+    private <T> Optional<T> getByUrl(String url, T t){
+        T item = null;
+        try {
+            String responseJsonString = BuildModels.requestJsonString(url);
+            Gson gson = new Gson();
+             item = (T) gson.fromJson(responseJsonString, t.getClass());
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(item);
+    }
 
     public Optional<People> getPeopleByName(String name){
         List<People> people = getAllPeople();
@@ -64,15 +75,8 @@ public class Client implements ClientInterface {
 
     public Optional<People> getPeopleByID(int id){
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
-        People people = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-            people = gson.fromJson(responseJsonString, People.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(people);
+        People people = new People();
+        return this.getByUrl(url, people);
     }
 
     public List<People> getAllPeople()  {
@@ -88,15 +92,8 @@ public class Client implements ClientInterface {
 
     public Optional<Planet> getPlanetByID(int id)  {
         String url = this.swapiURL + "planets/" + Integer.toString(id) + "/";
-        Planet planet = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-            planet = gson.fromJson(responseJsonString, Planet.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(planet);
+        Planet planet = new Planet();
+        return this.getByUrl(url, planet);
     }
 
     public List<Planet> getAllPlanets()  {
@@ -112,15 +109,8 @@ public class Client implements ClientInterface {
 
     public Optional<Film> getFilmByID(int id)  {
         String url = this.swapiURL + "films/" + Integer.toString(id) + "/";
-        Film film = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-             film = gson.fromJson(responseJsonString, Film.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(film);
+        Film film = new Film();
+        return this.getByUrl(url, film);
     }
 
     public List<Film> getAllFilms()  {
@@ -136,15 +126,8 @@ public class Client implements ClientInterface {
 
     public Optional<Species> getSpeciesByID(int id)  {
         String url = this.swapiURL + "species/" + Integer.toString(id) + "/";
-        Species species = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-            species = gson.fromJson(responseJsonString, Species.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(species);
+        Species species = new Species();
+        return this.getByUrl(url, species);
     }
 
     public List<Species> getAllSpecies()  {
@@ -160,15 +143,8 @@ public class Client implements ClientInterface {
 
     public Optional<Vehicle> getVehicleByID(int id)  {
         String url = this.swapiURL + "vehicles/" + Integer.toString(id) + "/";
-        Vehicle vehicle = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-            vehicle = gson.fromJson(responseJsonString, Vehicle.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(vehicle);
+        Vehicle vehicle = new Vehicle();
+        return this.getByUrl(url, vehicle);
     }
 
     public List<Vehicle> getAllVehicles()  {
@@ -184,15 +160,8 @@ public class Client implements ClientInterface {
 
     public Optional<Starship> getStarshipByID(int id)  {
         String url = this.swapiURL + "starships/" + Integer.toString(id) + "/";
-        Starship starship = null;
-        try {
-            String responseJsonString = BuildModels.requestJsonString(url);
-            Gson gson = new Gson();
-            starship = gson.fromJson(responseJsonString, Starship.class);
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(starship);
+        Starship starship = new Starship();
+        return this.getByUrl(url, starship);
     }
 
     public List<Starship> getAllStarships()  {
