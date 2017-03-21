@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,12 +57,12 @@ public class Client implements ClientInterface {
         return list;
     }
 
-    private <T> Optional<T> getByUrl(String url, T t){
+    private <T> Optional<T> getByUrl(String url, Type t){
         T item = null;
         try {
             String responseJsonString = BuildModels.requestJsonString(url);
             Gson gson = new Gson();
-             item = (T) gson.fromJson(responseJsonString, t.getClass());
+             item = gson.fromJson(responseJsonString, t);
         } catch (UnirestException e) {
             e.printStackTrace();
         }
@@ -75,8 +76,7 @@ public class Client implements ClientInterface {
 
     public Optional<People> getPeopleByID(int id){
         String url = this.swapiURL + "people/" + Integer.toString(id) + "/";
-        People people = new People();
-        return this.getByUrl(url, people);
+        return this.getByUrl(url, People.class);
     }
 
     public List<People> getAllPeople()  {
@@ -92,8 +92,7 @@ public class Client implements ClientInterface {
 
     public Optional<Planet> getPlanetByID(int id)  {
         String url = this.swapiURL + "planets/" + Integer.toString(id) + "/";
-        Planet planet = new Planet();
-        return this.getByUrl(url, planet);
+        return this.getByUrl(url, Planet.class);
     }
 
     public List<Planet> getAllPlanets()  {
@@ -109,8 +108,7 @@ public class Client implements ClientInterface {
 
     public Optional<Film> getFilmByID(int id)  {
         String url = this.swapiURL + "films/" + Integer.toString(id) + "/";
-        Film film = new Film();
-        return this.getByUrl(url, film);
+        return this.getByUrl(url, Film.class);
     }
 
     public List<Film> getAllFilms()  {
@@ -126,8 +124,7 @@ public class Client implements ClientInterface {
 
     public Optional<Species> getSpeciesByID(int id)  {
         String url = this.swapiURL + "species/" + Integer.toString(id) + "/";
-        Species species = new Species();
-        return this.getByUrl(url, species);
+        return this.getByUrl(url, Species.class);
     }
 
     public List<Species> getAllSpecies()  {
@@ -143,8 +140,7 @@ public class Client implements ClientInterface {
 
     public Optional<Vehicle> getVehicleByID(int id)  {
         String url = this.swapiURL + "vehicles/" + Integer.toString(id) + "/";
-        Vehicle vehicle = new Vehicle();
-        return this.getByUrl(url, vehicle);
+        return this.getByUrl(url, Vehicle.class);
     }
 
     public List<Vehicle> getAllVehicles()  {
@@ -160,8 +156,7 @@ public class Client implements ClientInterface {
 
     public Optional<Starship> getStarshipByID(int id)  {
         String url = this.swapiURL + "starships/" + Integer.toString(id) + "/";
-        Starship starship = new Starship();
-        return this.getByUrl(url, starship);
+        return this.getByUrl(url, Starship.class);
     }
 
     public List<Starship> getAllStarships()  {
