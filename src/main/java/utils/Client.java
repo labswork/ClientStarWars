@@ -17,7 +17,7 @@ public class Client implements ClientInterface {
     private String swapiURL = "http://swapi.co/api/";
 
 
-    private <T> List<T> getOnePage(String responseJsonString, T t)  {
+    private <T> List<T> getOnePage(String responseJsonString, Type t)  {
 
         List<T> listItems = new ArrayList<>();
         Gson gson = new Gson();
@@ -27,13 +27,13 @@ public class Client implements ClientInterface {
         JsonArray jArray = o.getAsJsonArray("results");
 
         for (int i = 0; i < jArray.size(); i++) {
-            T item = (T) gson.fromJson(jArray.get(i), t.getClass());
+            T item = (T) gson.fromJson(jArray.get(i), t);
             listItems.add(item);
         }
         return listItems;
     }
 
-    private <T> List<T> getAllPage(String url, T t){
+    private <T> List<T> getAllPage(String url, Type t){
         boolean FirstStart = true;
         List<T> list = new ArrayList<T>();
 
@@ -81,8 +81,7 @@ public class Client implements ClientInterface {
 
     public List<People> getAllPeople()  {
         String url = this.swapiURL + "people/";
-        People people = new People();
-        return this.getAllPage(url, people);
+        return this.getAllPage(url, People.class);
     }
 
     public Optional<Planet> getPlanetByName(String name)  {
@@ -97,8 +96,7 @@ public class Client implements ClientInterface {
 
     public List<Planet> getAllPlanets()  {
         String url = this.swapiURL + "planets/";
-        Planet planet = new Planet();
-        return this.getAllPage(url, planet);
+        return this.getAllPage(url, Planet.class);
     }
 
     public Optional<Film> getFilmByTitle(String title)  {
@@ -113,8 +111,7 @@ public class Client implements ClientInterface {
 
     public List<Film> getAllFilms()  {
         String url = this.swapiURL + "films/";
-        Film film = new Film();
-        return this.getAllPage(url, film);
+        return this.getAllPage(url, Film.class);
     }
 
     public Optional<Species> getSpeciesByName(String name)  {
@@ -129,8 +126,7 @@ public class Client implements ClientInterface {
 
     public List<Species> getAllSpecies()  {
         String url = this.swapiURL + "species/";
-        Species species = new Species();
-        return this.getAllPage(url, species);
+        return this.getAllPage(url, Species.class);
     }
 
     public Optional<Vehicle> getVehicleByName(String name)  {
@@ -145,8 +141,7 @@ public class Client implements ClientInterface {
 
     public List<Vehicle> getAllVehicles()  {
         String url = this.swapiURL + "vehicles/";
-        Vehicle vehicle = new Vehicle();
-        return this.getAllPage(url, vehicle);
+        return this.getAllPage(url, Vehicle.class);
     }
 
     public Optional<Starship> getStarshipByName(String name)  {
@@ -161,7 +156,6 @@ public class Client implements ClientInterface {
 
     public List<Starship> getAllStarships()  {
         String url = this.swapiURL + "starships/";
-        Starship starship = new Starship();
-        return this.getAllPage(url, starship);
+        return this.getAllPage(url, Starship.class);
     }
 }
