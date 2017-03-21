@@ -11,7 +11,6 @@ public class MainClass {
 
 
 
-
 ///*
         Client singleton = new Client();
 
@@ -23,16 +22,23 @@ public class MainClass {
         String nameStarship = "Sentinel-class landing craft";
 
 
-        System.out.println(singleton.getPeopleByName(namePeople).get().getUrl());
-        System.out.println(singleton.getPlanetByName(namePlanet).get().getUrl());
-        System.out.println(singleton.getFilmByTitle(titleFilm).get().getUrl());
-        System.out.println(singleton.getSpeciesByName(nameSpecies).get().getUrl());
-        System.out.println(singleton.getVehicleByName(nameVehicle).get().getUrl());
-        System.out.println(singleton.getStarshipByName(nameStarship).get().getUrl());
+        Optional<People> peopleOptional = singleton.getPeopleByName(namePeople);
+        Optional<Planet> planetOptional = singleton.getPlanetByName(namePlanet);
+        Optional<Film> filmOptional = singleton.getFilmByTitle(titleFilm);
+        Optional<Species> speciesOptional = singleton.getSpeciesByName(nameSpecies);
+        Optional<Vehicle> vehicleOptional = singleton.getVehicleByName(nameVehicle);
+        Optional<Starship> starshipOptional = singleton.getStarshipByName(nameStarship);
+
+        if (peopleOptional.isPresent()) System.out.println(peopleOptional.get().getUrl());
+        if (planetOptional.isPresent()) System.out.println(planetOptional.get().getUrl());
+        if (filmOptional.isPresent()) System.out.println(filmOptional.get().getUrl());
+        if (speciesOptional.isPresent()) System.out.println(speciesOptional.get().getUrl());
+        if (vehicleOptional.isPresent()) System.out.println(vehicleOptional.get().getUrl());
+        if (starshipOptional.isPresent()) System.out.println(starshipOptional.get().getUrl());
 
         String string = "";
 
-        Optional<People> peopleOptional = singleton.getPeopleByID(1);
+        peopleOptional = singleton.getPeopleByID(1);
         if (peopleOptional.isPresent()) {
             string = peopleOptional.get().getName();
             System.out.print(string);
@@ -40,30 +46,45 @@ public class MainClass {
             System.out.println(namePeople.equalsIgnoreCase(string));
         }
 
-        string = singleton.getPlanetByID(2).get().getName();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(namePlanet.equalsIgnoreCase(string));
+        planetOptional = singleton.getPlanetByID(2);
+        if (planetOptional.isPresent()) {
+            string = planetOptional.get().getName();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(namePlanet.equalsIgnoreCase(string));
+        }
 
-        string = singleton.getFilmByID(1).get().getTitle();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(titleFilm.equalsIgnoreCase(string));
+        filmOptional = singleton.getFilmByID(1);
+        if (filmOptional.isPresent()) {
+            string = filmOptional.get().getTitle();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(titleFilm.equalsIgnoreCase(string));
+        }
 
-        string = singleton.getSpeciesByID(5).get().getName();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(nameSpecies.equalsIgnoreCase(string));
+        speciesOptional = singleton.getSpeciesByID(5);
+        if (speciesOptional.isPresent()) {
+            string = speciesOptional.get().getName();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(nameSpecies.equalsIgnoreCase(string));
+        }
 
-        string = singleton.getVehicleByID(4).get().getName();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(nameVehicle.equalsIgnoreCase(string));
+        vehicleOptional = singleton.getVehicleByID(4);
+        if (vehicleOptional.isPresent()) {
+            string = vehicleOptional.get().getName();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(nameVehicle.equalsIgnoreCase(string));
+        }
 
-        string = singleton.getStarshipByID(5).get().getName();
-        System.out.print(string);
-        System.out.print(" соответвует ссылке: ");
-        System.out.println(nameStarship.equalsIgnoreCase(string));
+        starshipOptional = singleton.getStarshipByID(5);
+        if (starshipOptional.isPresent()) {
+            string = starshipOptional.get().getName();
+            System.out.print(string);
+            System.out.print(" соответвует ссылке: ");
+            System.out.println(nameStarship.equalsIgnoreCase(string));
+        }
 
 //*/
 
