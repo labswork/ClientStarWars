@@ -29,6 +29,9 @@ public class People {
 
     }
 
+    public People(People people) {
+    }
+
 
     public String getName() {
         return name;

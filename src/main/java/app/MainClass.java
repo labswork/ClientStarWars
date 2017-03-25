@@ -29,12 +29,12 @@ public class MainClass {
         Optional<Vehicle> vehicleOptional = singleton.getVehicleByName(nameVehicle);
         Optional<Starship> starshipOptional = singleton.getStarshipByName(nameStarship);
 
-        if (peopleOptional.isPresent()) System.out.println(peopleOptional.get().getUrl());
-        if (planetOptional.isPresent()) System.out.println(planetOptional.get().getUrl());
-        if (filmOptional.isPresent()) System.out.println(filmOptional.get().getUrl());
-        if (speciesOptional.isPresent()) System.out.println(speciesOptional.get().getUrl());
-        if (vehicleOptional.isPresent()) System.out.println(vehicleOptional.get().getUrl());
-        if (starshipOptional.isPresent()) System.out.println(starshipOptional.get().getUrl());
+        peopleOptional.ifPresent(people -> System.out.println(people.getUrl()));
+        planetOptional.ifPresent(planet -> System.out.println(planet.getUrl()));
+        filmOptional.ifPresent(film -> System.out.println(film.getUrl()));
+        speciesOptional.ifPresent(species -> System.out.println(species.getUrl()));
+        vehicleOptional.ifPresent(vehicle -> System.out.println(vehicle.getUrl()));
+        starshipOptional.ifPresent(starship -> System.out.println(starship.getUrl()));
 
         String string = "";
 
