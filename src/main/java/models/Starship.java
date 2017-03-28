@@ -2,9 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by vgorokhov on 15.02.2017.
- */
+
 public class Starship {
     private String url;
     private String name;

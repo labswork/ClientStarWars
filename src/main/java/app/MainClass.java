@@ -36,7 +36,7 @@ public class MainClass {
         vehicleOptional.ifPresent(vehicle -> System.out.println(vehicle.getUrl()));
         starshipOptional.ifPresent(starship -> System.out.println(starship.getUrl()));
 
-        String string = "";
+        String string;
 
         peopleOptional = singleton.getPeopleByID(1);
         if (peopleOptional.isPresent()) {

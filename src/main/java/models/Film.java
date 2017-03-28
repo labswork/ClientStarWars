@@ -2,9 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by vgorokhov on 15.02.2017.
- */
+
 public class Film {
     private String url;
     private String title;

@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by vgorokhov on 02.03.2017.
- */
 public class Client implements ClientInterface {
 
-    private String swapiURL = "http://swapi.co/api/";
+    private  String swapiURL = "http://swapi.co/api/";
 
 
     private <T> List<T> getOnePage(String responseJsonString, Type t)  {
@@ -27,7 +24,7 @@ public class Client implements ClientInterface {
         JsonArray jArray = o.getAsJsonArray("results");
 
         for (int i = 0; i < jArray.size(); i++) {
-            T item = (T) gson.fromJson(jArray.get(i), t);
+            T item =  gson.fromJson(jArray.get(i), t);
             listItems.add(item);
         }
         return listItems;

@@ -3,9 +3,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by rootid on 13.02.2017.
- */
+
 public class People {
 
     private String name;

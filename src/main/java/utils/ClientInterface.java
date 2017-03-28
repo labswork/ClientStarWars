@@ -5,9 +5,7 @@ import models.*;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by vgorokhov on 02.03.2017.
- */
+
 public interface ClientInterface {
     Optional<People> getPeopleByName (String name);
     Optional<People> getPeopleByID(int id) ;

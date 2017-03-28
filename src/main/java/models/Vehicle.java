@@ -2,9 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by vgorokhov on 15.02.2017.
- */
+
 public class Vehicle {
     private String name;
     private String model;
@@ -134,4 +132,3 @@ public class Vehicle {
         this.films = films;
     }
 }
-//github commit
