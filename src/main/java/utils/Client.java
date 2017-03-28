@@ -31,7 +31,6 @@ public class Client implements ClientInterface {
     }
 
     private <T> List<T> getAllPage(String url, Type t){
-        boolean FirstStart = true;
         List<T> list = new ArrayList<T>();
 
         String responseJsonString = null;
@@ -41,16 +40,16 @@ public class Client implements ClientInterface {
             e.printStackTrace();
         }
 
-        while ((!BuildModels.itLastPage(responseJsonString)) || FirstStart){
-            FirstStart = false;
-            if (!BuildModels.itLastPage(responseJsonString))  url = BuildModels.getNextPageLink(responseJsonString);
+        while (!BuildModels.itLastPage(responseJsonString)){
             list.addAll(getOnePage(responseJsonString, t));
+            if (!BuildModels.itLastPage(responseJsonString))  url = BuildModels.getNextPageLink(responseJsonString);
             try {
                 responseJsonString = BuildModels.requestJsonString(url);
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
         }
+        list.addAll(getOnePage(responseJsonString, t));
         return list;
     }
 

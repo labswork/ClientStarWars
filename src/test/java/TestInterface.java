@@ -29,7 +29,7 @@ public class TestInterface {
     public void getAllPeopleTest(){
         Client client = new Client();
         List<People> people = client.getAllPeople();
-        Assert.assertEquals(80, people.size());
+        Assert.assertEquals(87, people.size());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class TestInterface {
     public void getAllPlanetsTest() {
         Client client = new Client();
         List<Planet> planets = client.getAllPlanets();
-        Assert.assertEquals(60, planets.size());
+        Assert.assertEquals(61, planets.size());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TestInterface {
     public void getAllSpeciesTest() {
         Client client = new Client();
         List<Species> species = client.getAllSpecies();
-        Assert.assertEquals(30, species.size());
+        Assert.assertEquals(37, species.size());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class TestInterface {
     public void getAllVehiclesTest() {
         Client client = new Client();
         List<Vehicle> vehicles = client.getAllVehicles();
-        Assert.assertEquals(30, vehicles.size());
+        Assert.assertEquals(39, vehicles.size());
     }
 
     @Test
@@ -139,6 +139,6 @@ public class TestInterface {
     public void getAllStarshipsTest() {
         Client client = new Client();
         List<Starship> starships = client.getAllStarships();
-        Assert.assertEquals(30, starships.size());
+        Assert.assertEquals(37, starships.size());
     }
 }
