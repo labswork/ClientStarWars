@@ -46,8 +46,6 @@ public class TestParser {
 
     }
     public void compare(People people, People peopleFromXML){
-
-
         Assert.assertEquals(people.getName(), peopleFromXML.getName());
         Assert.assertEquals(people.getUrl(), peopleFromXML.getUrl());
         Assert.assertEquals(people.getBirth_year(), peopleFromXML.getBirth_year());
