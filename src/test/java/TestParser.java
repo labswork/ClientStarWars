@@ -40,10 +40,6 @@ public class TestParser {
         client.getPeopleByID(1).ifPresent(people -> Assert.assertEquals(people, peopleFromXML));
 
 
-
-
-
-
     }
     public void compare(People people, People peopleFromXML){
         Assert.assertEquals(people.getName(), peopleFromXML.getName());
