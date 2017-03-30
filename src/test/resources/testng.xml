@@ -3,7 +3,7 @@
 <suite name="UnitTest" verbose="1" >
     <test name="Nopackage" >
         <classes>
-            <class name="TestInterface"/>
+            <class name="TestInterfaceClient"/>
         </classes>
     </test>
 </suite>

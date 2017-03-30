@@ -3,15 +3,23 @@ package app;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import models.*;
 import utils.Client;
+import utils.ParserJaxb;
 
+import java.io.File;
 import java.util.Optional;
 
 public class MainClass {
     public static void main(String[] args) throws UnirestException {
 
+        Client client = new Client();
+        ParserJaxb parser = new ParserJaxb();
+        String file = "fileName.xml";
+
+        client.getPeopleByID(1).ifPresent(people -> parser.setObject(file, people));
 
 
-///*
+
+/*
         Client singleton = new Client();
 
         String namePeople = "luke skywalker";

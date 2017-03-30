@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class TestInterface {
+public class TestInterfaceClient {
     @Test
     public void getPeopleByNameTest(){
         Client client = new Client();

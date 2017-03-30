@@ -6,16 +6,17 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class BuildModels {
 
+    private static Pattern pattern = Pattern.compile("\\d");
 
     public static String requestJsonString(String url) throws UnirestException{
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
                 .asJson();
-//        System.out.print("body: ");
-//        System.out.println(jsonResponse.getBody());
         return jsonResponse.getBody().toString();
     }
     public static boolean itLastPage(String jsonString){
@@ -32,6 +33,13 @@ public class BuildModels {
     public static JsonObject getJsonObjectParse(String jsonString){
         JsonElement jsonElementParse = new JsonParser().parse(jsonString);
         return jsonElementParse.getAsJsonObject();
+    }
+    public static int getID(String url){
+        Matcher matcher = pattern.matcher(url);
+        int id = -1;
+        if (matcher.find()) id = Integer.parseInt(matcher.group());
+        return id;
+
     }
 
 }
