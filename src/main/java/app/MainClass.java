@@ -1,21 +1,34 @@
 package app;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import models.*;
 import utils.Client;
+import utils.Parser;
 import utils.ParserJaxb;
 
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.jar.Attributes;
 
 public class MainClass {
     public static void main(String[] args) throws UnirestException {
 
-        Client client = new Client();
-        ParserJaxb parser = new ParserJaxb();
-        String file = "fileName.xml";
+//        Client client = new Client();
+//        ParserJaxb parser = new ParserJaxb();
+//        String file = "fileName.xml";
+//
+//        client.getPeopleByID(1).ifPresent(people -> parser.setObject(file, people));
 
-        client.getPeopleByID(1).ifPresent(people -> parser.setObject(file, people));
+
 
 
 

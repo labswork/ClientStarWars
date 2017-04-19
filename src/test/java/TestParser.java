@@ -1,12 +1,12 @@
 import models.People;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import utils.Client;
 import utils.Parser;
 import utils.ParserJaxb;
+import utils.ParserStax;
 
 import java.io.File;
 
@@ -20,7 +20,7 @@ public class TestParser {
     }
 
 
-    public void testSetObject(String file){
+    public void testJaxbSetObject(String file){
 
         Client client = new Client();
         Parser parser = new ParserJaxb();
@@ -29,15 +29,14 @@ public class TestParser {
     }
 
     @Test
-    public void testGetObgect(){
+    public void testJaxbGetObgect(){
         String file = "fileName.xml";
-        testSetObject(file);
+        testJaxbSetObject(file);
         Client client = new Client();
         Parser parser = new ParserJaxb();
 
         People peopleFromXML = parser.getObject(file, People.class);
         client.getPeopleByID(1).ifPresent(people -> compare(people, peopleFromXML) );
-        client.getPeopleByID(1).ifPresent(people -> Assert.assertEquals(people, peopleFromXML));
 
 
     }
@@ -58,5 +57,16 @@ public class TestParser {
         Assert.assertEquals(people.getStarships(), peopleFromXML.getStarships());
         Assert.assertEquals(people.getVehicles(), peopleFromXML.getVehicles());
 
+    }
+
+    @Test
+    public void testStaxParser(){
+
+        String file = "fileName.xml";
+        Client client = new Client();
+        Parser parser = new ParserStax();
+
+        People peopleFromXML = parser.getObject(file, People.class);
+        client.getPeopleByID(1).ifPresent(people -> compare(people, peopleFromXML) );
     }
 }
